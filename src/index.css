@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at center, #111111 0%, #000000 100%);
+  color: #fff;
+  height: 100vh;
+  overflow: hidden; /* This locks the viewport */
+}
+
+/* This is the magic class for your pages */
+.scrollable-section {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Slim Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff3333;
+}
+
+/* Date picker fixes */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(100%);
+    cursor: pointer;
+}
+input[type="date"] {
+    color-scheme: dark;
+}
+
+
+/* Make the main layout stack on mobile */
+body, #root {
+  overflow-x: hidden;
+}
+
+/* Responsive Container for Pages */
+main {
+  padding: 20px !important; /* Smaller padding on mobile */
+}
+
+@media (max-width: 768px) {
+  /* Sidebar handling: You might want to hide it or make it a top bar */
+  div[style*="display: flex"] {
+    flex-direction: column !important;
+  }
+
+  /* Force tables to scroll horizontally so they don't squash */
+  div[style*="background: #080808"] {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    min-width: 600px; /* Ensures table doesn't get too thin */
+  }
+
+  /* Make Modals full width on mobile */
+  form[style*="maxWidth: 400px"] {
+    max-width: 90% !important;
+    padding: 20px !important;
+  }
+}
