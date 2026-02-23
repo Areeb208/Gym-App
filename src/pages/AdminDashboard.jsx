@@ -5,7 +5,6 @@ import {
   CheckCircle,
   TrendingUp,
   Loader2,
-  Menu,
 } from "lucide-react";
 import Sidebar from "../components/Sidebar";
 import { memberApi } from "../api/memberApi";
@@ -21,7 +20,6 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  // Handle window resizing for responsiveness
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
@@ -35,11 +33,9 @@ const AdminDashboard = () => {
           memberApi.getAll(),
           axios.get(`/.netlify/functions/payments?t=${new Date().getTime()}`),
         ]);
-
         const members = memberRes.data;
         const payments = paymentRes.data;
         const today = new Date();
-
         const expiredCount = members.filter(
           (m) => new Date(m.membershipEnd) < today,
         ).length;
@@ -48,7 +44,6 @@ const AdminDashboard = () => {
           (sum, p) => sum + (Number(p.amount) || 0),
           0,
         );
-
         setStats({
           total: members.length,
           active: activeCount,
@@ -66,15 +61,7 @@ const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <div
-        style={{
-          display: "flex",
-          background: "#000",
-          minHeight: "100vh",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <div style={loadingOverlay}>
         <Loader2 className="animate-spin" color="#ff3333" size={40} />
       </div>
     );
@@ -84,35 +71,31 @@ const AdminDashboard = () => {
     <div
       style={{
         display: "flex",
-        flexDirection: isMobile ? "column" : "row", // Stacks on mobile
+        flexDirection: isMobile ? "column" : "row",
         backgroundColor: "#000",
-        color: "#fff",
         minHeight: "100vh",
+        color: "#fff",
       }}
     >
       <Sidebar />
-
       <main
         style={{
           flex: 1,
-          padding: isMobile ? "20px" : "40px", // Less padding on mobile
+          padding: isMobile ? "20px 20px 100px 20px" : "40px",
+          maxWidth: "1400px",
+          margin: "0 auto",
           width: "100%",
           boxSizing: "border-box",
         }}
       >
-        <header style={{ marginBottom: isMobile ? "30px" : "50px" }}>
-          <h1
-            style={{
-              fontSize: "10px",
-              letterSpacing: "4px",
-              color: "#ff3333",
-              marginBottom: "8px",
-            }}
-          >
-            ANALYTICS
-          </h1>
+        <header style={{ marginBottom: isMobile ? "25px" : "40px" }}>
+          <p style={analyticsLabel}>ANALYTICS</p>
           <h2
-            style={{ fontSize: isMobile ? "24px" : "32px", fontWeight: "300" }}
+            style={{
+              fontSize: isMobile ? "24px" : "32px",
+              fontWeight: "300",
+              margin: 0,
+            }}
           >
             Sir Syed Gym Overview
           </h2>
@@ -122,79 +105,68 @@ const AdminDashboard = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: isMobile ? "15px" : "20px",
+            gridTemplateColumns: isMobile
+              ? "1fr 1fr"
+              : "repeat(auto-fit, minmax(240px, 1fr))",
+            gap: isMobile ? "12px" : "20px",
           }}
         >
           <StatCard
-            title="Total Registered"
+            title="Registered"
             value={stats.total}
-            icon={<Users size={isMobile ? 20 : 24} color="#fff" />}
+            icon={<Users size={18} color="#fff" />}
             borderColor="rgba(255,255,255,0.1)"
             isMobile={isMobile}
           />
           <StatCard
-            title="Active Members"
+            title="Active"
             value={stats.active}
-            icon={<CheckCircle size={isMobile ? 20 : 24} color="#00ff64" />}
+            icon={<CheckCircle size={18} color="#00ff64" />}
             borderColor="rgba(0,255,100,0.2)"
             isMobile={isMobile}
           />
           <StatCard
-            title="Expired/Due"
+            title="Expired"
             value={stats.expired}
-            icon={<AlertCircle size={isMobile ? 20 : 24} color="#ff3333" />}
+            icon={<AlertCircle size={18} color="#ff3333" />}
             borderColor="rgba(255,51,51,0.2)"
             isMobile={isMobile}
           />
           <StatCard
-            title="Total Revenue"
-            value={`Rs. ${stats.revenue.toLocaleString()}`}
-            icon={<TrendingUp size={isMobile ? 20 : 24} color="#00ff64" />}
+            title="Revenue"
+            value={`${stats.revenue.toLocaleString()}`}
+            prefix="Rs. "
+            icon={<TrendingUp size={18} color="#00ff64" />}
             borderColor="rgba(0,255,100,0.1)"
             isMobile={isMobile}
           />
         </div>
 
-        {/* System Status Section */}
+        {/* FIXED System Status Section */}
         <section
           style={{
-            marginTop: isMobile ? "30px" : "50px",
-            padding: isMobile ? "20px" : "40px",
+            marginTop: isMobile ? "25px" : "40px",
+            padding: isMobile ? "20px" : "30px",
             background: "rgba(255,255,255,0.02)",
-            borderRadius: isMobile ? "20px" : "32px",
+            borderRadius: "20px",
             border: "1px solid rgba(255,255,255,0.05)",
           }}
         >
-          <h3
-            style={{
-              fontSize: "16px",
-              fontWeight: "400",
-              color: "#666",
-              marginBottom: "15px",
-            }}
-          >
-            System Status
-          </h3>
+          <h3 style={statusTitle}>System Status</h3>
           <div
             style={{
               display: "flex",
-              gap: "15px",
-              alignItems: "center",
-              flexWrap: "wrap",
+              gap: "12px",
+              alignItems: "center", // Ensures dot and text are on the same line
+              flexDirection: "row", // Forces horizontal layout
             }}
           >
-            <div
-              style={{
-                width: "8px",
-                height: "8px",
-                borderRadius: "50%",
-                background: "#00ff64",
-                boxShadow: "0 0 8px #00ff64",
-              }}
-            ></div>
-            <p style={{ fontSize: "12px", color: "#aaa", margin: 0 }}>
-              DB: MongoDB Atlas Active
+            <div style={pulseDot}></div>
+            <p style={{ fontSize: "12px", color: "#666", margin: 0 }}>
+              Database:{" "}
+              <span style={{ color: "#aaa", fontWeight: "600" }}>
+                MongoDB Atlas Active
+              </span>
             </p>
           </div>
         </section>
@@ -203,47 +175,98 @@ const AdminDashboard = () => {
   );
 };
 
-const StatCard = ({ title, value, icon, borderColor, isMobile }) => (
+// --- StatCard Component with FIXED Corner-to-Corner alignment ---
+const StatCard = ({ title, value, prefix, icon, borderColor, isMobile }) => (
   <div
     style={{
-      padding: isMobile ? "20px" : "30px",
-      background: "#111",
+      padding: isMobile ? "15px" : "25px",
+      background: "#0a0a0a",
       borderRadius: isMobile ? "16px" : "24px",
       border: `1px solid ${borderColor}`,
       display: "flex",
       flexDirection: "column",
-      gap: isMobile ? "10px" : "15px",
+      justifyContent: "space-between",
+      minHeight: isMobile ? "110px" : "150px",
+      boxSizing: "border-box",
     }}
   >
+    {/* TOP ROW: Title on FAR LEFT, Icon on FAR RIGHT */}
     <div
       style={{
         display: "flex",
+        flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center",
+        alignItems: "flex-start",
+        width: "100%",
       }}
     >
+      <span style={cardTitleStyle}>{title}</span>
+      <div style={{ opacity: 0.8 }}>{icon}</div>
+    </div>
+
+    {/* BOTTOM ROW: The Value */}
+    <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
+      {prefix && (
+        <span
+          style={{
+            fontSize: isMobile ? "12px" : "18px",
+            color: "#444",
+            fontWeight: "600",
+          }}
+        >
+          {prefix}
+        </span>
+      )}
       <span
         style={{
-          fontSize: "10px",
-          color: "#444",
-          letterSpacing: "1px",
-          textTransform: "uppercase",
+          fontSize: isMobile ? "26px" : "40px",
+          fontWeight: "700",
+          color: value === 0 || value === "0" ? "#333" : "#fff",
+          lineHeight: "1",
         }}
       >
-        {title}
+        {value}
       </span>
-      {icon}
     </div>
-    <span
-      style={{
-        fontSize: isMobile ? "28px" : "38px",
-        fontWeight: "700",
-        color: value === 0 || value === "Rs. 0" ? "#444" : "#fff",
-      }}
-    >
-      {value}
-    </span>
   </div>
 );
+
+// --- Styles ---
+const loadingOverlay = {
+  display: "flex",
+  background: "#000",
+  minHeight: "100vh",
+  alignItems: "center",
+  justifyContent: "center",
+};
+const analyticsLabel = {
+  fontSize: "10px",
+  letterSpacing: "3px",
+  color: "#ff3333",
+  marginBottom: "4px",
+  fontWeight: "700",
+};
+const cardTitleStyle = {
+  fontSize: "9px",
+  color: "#666",
+  letterSpacing: "1px",
+  textTransform: "uppercase",
+  fontWeight: "700",
+};
+const statusTitle = {
+  fontSize: "10px",
+  fontWeight: "700",
+  color: "#333",
+  marginBottom: "12px",
+  textTransform: "uppercase",
+  letterSpacing: "1px",
+};
+const pulseDot = {
+  width: "8px",
+  height: "8px",
+  borderRadius: "50%",
+  background: "#00ff64",
+  boxShadow: "0 0 12px rgba(0,255,100,0.5)",
+};
 
 export default AdminDashboard;

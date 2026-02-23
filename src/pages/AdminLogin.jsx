@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+//eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Lock, User, ShieldCheck } from 'lucide-react';
 import axios from 'axios';
