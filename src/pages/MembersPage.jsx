@@ -98,16 +98,17 @@ const MembersPage = () => {
       style={{
         display: "flex",
         flexDirection: isMobile ? "column" : "row",
-        minHeight: "100vh",
+        height: "100dvh",
         backgroundColor: "#000",
         color: "#fff",
+        overflow: "hidden",
       }}
     >
       <Sidebar />
       <main
         style={{
           flex: 1,
-          padding: isMobile ? "20px 20px 100px 20px" : "40px",
+          padding: isMobile ? "20px 20px 120px 20px" : "40px",
           overflowY: "auto",
           width: "100%",
           boxSizing: "border-box",

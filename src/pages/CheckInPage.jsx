@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+//eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -252,6 +253,7 @@ const CheckInPage = () => {
           ...adminLinkStyle,
           bottom: isMobile ? "20px" : "30px",
           left: isMobile ? "50%" : "auto",
+          right: isMobile ? "auto" : "30px",
           transform: isMobile ? "translateX(-50%)" : "none",
         }}
       >
@@ -271,7 +273,7 @@ const containerStyle = {
   background: "#000",
   color: "#fff",
   fontFamily: "Inter, sans-serif",
-  overflow: "hidden",
+  overflowY: "auto",
 };
 const logoHeader = {
   fontWeight: "900",

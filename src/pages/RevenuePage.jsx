@@ -107,7 +107,7 @@ const RevenuePage = () => {
     <div style={{...layoutContainer, flexDirection: isMobile ? "column" : "row"}}>
       <Sidebar />
 
-      <main style={{ flex: 1, padding: isMobile ? "20px" : "40px", overflowY: "auto", width: "100%", boxSizing: "border-box" }}>
+      <main style={{ flex: 1, padding: isMobile ? "20px 20px 120px 20px" : "40px", overflowY: "auto", width: "100%", boxSizing: "border-box" }}>
         <header style={{ marginBottom: isMobile ? "20px" : "40px" }}>
           <h1 style={financeSub}>FINANCE</h1>
           <h2 style={{...titleStyle, fontSize: isMobile ? "24px" : "32px"}}>Revenue History</h2>
@@ -127,8 +127,8 @@ const RevenuePage = () => {
         </div>
 
         {/* Table Section */}
-        <div style={{...tableWrapper, overflowX: "auto"}}>
-          <table style={{ width: "100%", borderCollapse: "collapse", minWidth: isMobile ? "500px" : "100%" }}>
+        <div style={{...tableWrapper, overflowX: "auto", WebkitOverflowScrolling: "touch"}}>
+          <table style={{ width: "100%", borderCollapse: "collapse", minWidth: isMobile ? "600px" : "100%" }}>
             <thead>
               <tr style={theadStyle}>
                 <th style={{ padding: isMobile ? "12px" : "20px" }}>DATE</th>
@@ -186,7 +186,7 @@ const RevenuePage = () => {
       {/* EDIT MODAL */}
       {editOpen && (
         <div style={modalOverlay}>
-          <div style={{...modalContent, maxWidth: isMobile ? "90%" : "400px", padding: isMobile ? "25px" : "40px"}}>
+          <div style={{...modalContent, maxWidth: isMobile ? "90%" : "400px", padding: isMobile ? "25px" : "40px", maxHeight: "90vh", overflowY: "auto"}}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
               <h3 style={{ fontWeight: "300", fontSize: isMobile ? "18px" : "20px" }}>Edit Record</h3>
               <span style={{ fontSize: "10px", color: "#444" }}>ID: {selectedPayment?._id.slice(-6)}</span>
@@ -247,7 +247,7 @@ const RevenuePage = () => {
 };
 
 // Styles remain identical to your base code but are accessed via the spread (...) logic above.
-const layoutContainer = { display: "flex", height: "100vh", overflow: "hidden", backgroundColor: "#000", color: "#fff" };
+const layoutContainer = { display: "flex", height: "100dvh", overflow: "hidden", backgroundColor: "#000", color: "#fff" };
 const financeSub = { fontSize: "10px", letterSpacing: "4px", color: "#ff3333", marginBottom: "8px" };
 const titleStyle = { fontWeight: "300", color: "#fff" };
 const statCard = { background: "#0a0a0a", borderRadius: "24px", border: "1px solid #1a1a1a", marginBottom: "40px", display: "flex", justifyContent: "space-between", alignItems: "center", boxSizing: "border-box" };

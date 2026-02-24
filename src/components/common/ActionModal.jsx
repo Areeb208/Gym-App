@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, AlertCircle } from 'lucide-react';
 
 const ActionModal = ({ isOpen, onClose, onConfirm, title, message, confirmText, confirmColor }) => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 480);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 480);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);

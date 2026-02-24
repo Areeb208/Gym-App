@@ -44,7 +44,8 @@ const AdminLogin = () => {
       alignItems: 'center', 
       justifyContent: 'center', 
       background: 'radial-gradient(circle at center, #111 0%, #000 100%)',
-      padding: '20px' // Keeps card away from screen edges on mobile
+      padding: '20px', // Keeps card away from screen edges on mobile
+      overflowY: 'auto'
     }}>
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }}

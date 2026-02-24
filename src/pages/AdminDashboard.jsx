@@ -73,7 +73,8 @@ const AdminDashboard = () => {
         display: "flex",
         flexDirection: isMobile ? "column" : "row",
         backgroundColor: "#000",
-        minHeight: "100vh",
+        height: "100dvh",
+        overflow: "hidden",
         color: "#fff",
       }}
     >
@@ -81,11 +82,12 @@ const AdminDashboard = () => {
       <main
         style={{
           flex: 1,
-          padding: isMobile ? "20px 20px 100px 20px" : "40px",
+          padding: isMobile ? "20px 20px 120px 20px" : "40px",
           maxWidth: "1400px",
           margin: "0 auto",
           width: "100%",
           boxSizing: "border-box",
+          overflowY: "auto",
         }}
       >
         <header style={{ marginBottom: isMobile ? "25px" : "40px" }}>

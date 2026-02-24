@@ -87,12 +87,14 @@ const Sidebar = () => {
 const sidebarContainer = {
   width: "260px",
   borderRight: "1px solid #111",
-  height: "100vh",
+  height: "100%",
   padding: "40px 20px",
   display: "flex",
   flexDirection: "column",
   background: "#000",
   flexShrink: 0,
+  overflowY: "auto",
+  boxSizing: "border-box",
 };
 
 const mobileNavContainer = {
@@ -109,6 +111,7 @@ const mobileNavContainer = {
   padding: "0 10px",
   zIndex: 1000,
   backdropFilter: "blur(10px)",
+  boxSizing: "border-box",
 };
 
 const logoStyle = {

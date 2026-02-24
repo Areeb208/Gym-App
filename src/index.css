@@ -24,6 +24,7 @@ body {
 /* Slim Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
@@ -38,7 +39,6 @@ body {
 
 /* Date picker fixes */
 input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1) brightness(100%);
     cursor: pointer;
 }
 input[type="date"] {
@@ -57,11 +57,6 @@ main {
 }
 
 @media (max-width: 768px) {
-  /* Sidebar handling: You might want to hide it or make it a top bar */
-  div[style*="display: flex"] {
-    flex-direction: column !important;
-  }
-
   /* Force tables to scroll horizontally so they don't squash */
   div[style*="background: #080808"] {
     overflow-x: auto !important;

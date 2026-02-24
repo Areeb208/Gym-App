@@ -11,11 +11,11 @@ const DeleteModal = ({
   title = "Delete Member?",
   confirmText = "Delete Member",
 }) => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 480);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   // Track screen size for button layout
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 480);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);

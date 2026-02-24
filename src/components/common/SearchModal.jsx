@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+//eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Search, Phone } from 'lucide-react';
 
 const SearchModal = ({ isOpen, onClose, members }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 480);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 480);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -31,7 +32,7 @@ const SearchModal = ({ isOpen, onClose, members }) => {
             style={{
               ...modalStyle,
               width: isMobile ? '100%' : '450px',
-              height: isMobile ? '100%' : 'auto', // Full screen on mobile for easier typing
+              height: isMobile ? '100dvh' : 'auto', // Full screen on mobile for easier typing
               borderRadius: isMobile ? '0' : '32px',
               maxWidth: isMobile ? '100%' : '450px'
             }}
@@ -79,7 +80,9 @@ const SearchModal = ({ isOpen, onClose, members }) => {
 
             <div style={{
               ...resultsArea,
-              maxHeight: isMobile ? 'calc(100vh - 200px)' : '300px'
+              maxHeight: isMobile ? 'none' : '300px',
+              flex: isMobile ? 1 : 'none',
+              minHeight: 0
             }}>
               {filtered.length > 0 ? (
                 filtered.map(m => (

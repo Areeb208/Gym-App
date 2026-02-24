@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Save, User, Phone, Calendar, MapPin } from 'lucide-react';
 
 const MemberForm = ({ isOpen, onClose, onSave, initialData }) => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 480);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [formData, setFormData] = useState({
     name: initialData?.name || '',
     phone: initialData?.phone || '',
@@ -12,7 +13,7 @@ const MemberForm = ({ isOpen, onClose, onSave, initialData }) => {
   });
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 480);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -30,13 +31,13 @@ const MemberForm = ({ isOpen, onClose, onSave, initialData }) => {
           style={overlayStyle}
         >
           <motion.form 
-            initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
+            initial={{ scale: 0.9, y: isMobile ? 0 : 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: isMobile ? 0 : 20 }}
             onSubmit={handleSubmit} 
             style={{
               ...modalStyle,
               width: isMobile ? '100%' : '400px',
-              height: isMobile ? '100%' : 'auto',
-              maxHeight: isMobile ? '100%' : '90vh',
+              height: isMobile ? '100dvh' : 'auto',
+              maxHeight: isMobile ? '100dvh' : '90vh',
               borderRadius: isMobile ? '0' : '32px',
               padding: isMobile ? '20px' : '40px',
               overflowY: 'auto'
