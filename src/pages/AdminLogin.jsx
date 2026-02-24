@@ -72,7 +72,7 @@ const AdminLogin = () => {
           marginBottom: '8px', 
           textTransform: 'uppercase' 
         }}>
-          Sir Syed Gym
+          Iron Core Gym
         </h1>
         
         <h2 style={{ 

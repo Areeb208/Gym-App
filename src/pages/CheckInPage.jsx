@@ -101,7 +101,7 @@ const CheckInPage = () => {
                 letterSpacing: isMobile ? "8px" : "12px",
               }}
             >
-              SIR SYED GYM
+              IRON CORE GYM
             </h1>
 
             <div

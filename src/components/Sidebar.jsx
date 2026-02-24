@@ -59,7 +59,7 @@ const Sidebar = () => {
   // DESKTOP SIDEBAR
   return (
     <div style={sidebarContainer}>
-      <h2 style={logoStyle}>SIR SYED GYM</h2>
+      <h2 style={logoStyle}>IRON CORE GYM</h2>
 
       <Link to="/admin/dashboard" style={linkStyle("/admin/dashboard")}>
         <LayoutDashboard size={20} /> Dashboard

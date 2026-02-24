@@ -99,7 +99,7 @@ const AdminDashboard = () => {
               margin: 0,
             }}
           >
-            Sir Syed Gym Overview
+            Iron Core Gym Overview
           </h2>
         </header>
 
